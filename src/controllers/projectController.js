@@ -56,7 +56,7 @@ export const postProject = async (req, res) => {
    await newProject.save().then((project) => {
         console.log(project)
         return res.status(200).json({
-            message: 'Submission is succesfful. You can contact +2348059303261 on WhatsApp for speedy attention',
+            message: 'Submission is succesfful. You can contact +2348068773801 on WhatsApp for speedy attention',
             project
         })
     }).catch((err) => {

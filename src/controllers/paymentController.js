@@ -49,10 +49,16 @@ dotEnv.config()
 // }
 
 export const allUserPayment = (req, res) => {
-    Payment.find()
-    .populate("projects")
-    .then(payments => res.status(200).json(payments))
-    .catch(err => res.json(err))
+    // Payment.find()
+    // .populate("projects")
+    // .then(payments => res.status(200).json(payments))
+    // .catch(err => res.json(err))
+
+    Payment.find({})
+       .populate('paidProject')
+       .exec(function(error, payments) {
+        console.log(JSON.stringify(payments, null, "\t"))
+        })
 }
 
 export const userPayment = (req, res) => {
@@ -104,7 +110,9 @@ export const getPaymentDetails = (req, res) => {
                 amount, 
                 email, 
                 full_name,
+                paidProject: Project._id,
             }
+            
             const payment = new Payment(newPayment)
             //  const paymentId =  payment.paidProject
                 payment.save().then((payment) =>{
@@ -112,6 +120,13 @@ export const getPaymentDetails = (req, res) => {
                     // project.paymentDetails.push(payment)
                     // updatedProject.save()
                     res.status(200).json(payment)
+                    if (!error) {
+                        Payment.find({})
+                            .populate('paidProject')
+                            .exec(function(error, payments) {
+                                console.log(JSON.stringify(payments, null, "\t"))
+                            })
+                    }
                 }).catch(err => res.json(err))
                 // payment.paidProject = project._id; 
         })

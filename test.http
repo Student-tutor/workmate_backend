@@ -53,3 +53,6 @@ Content-Type: application/json
         "interest": ["Engineering", "Social Science"],
         "linkedln": "linkedln.com/ibrahim"
 }
+
+###
+GET http://localhost:2022/paystack HTTP/1.1
